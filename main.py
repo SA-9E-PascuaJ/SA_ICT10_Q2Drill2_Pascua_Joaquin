@@ -18,12 +18,17 @@ def result_checker(event=None):
     new_member = {full_name} - {""}
     master_set = master_set | new_member
 
-    members_html = "<br>".join(sorted(master_set))
+    members_html = "".join(
+        map(lambda name: f'<span class="member-badge">{name}</span>', sorted(master_set))
+    )
+
     document.querySelector("#output").innerHTML = f"""
-        <strong>All Club Members:</strong><br>
-        {members_html}
-        <br><br>
-        <strong>Total Number of Members:</strong> {len(master_set)}
+        <div class="results-title">All Club Members</div>
+        <div>{members_html}</div>
+        <div class="total-box">
+            <div class="total-number">{len(master_set)}</div>
+            <div class="total-label">Total Number of Members</div>
+        </div>
     """
 
     document.querySelector("#first_name").value = ""
